@@ -1567,7 +1567,7 @@ static int set_fan(Gpx *gpx, unsigned extruder_id, unsigned state)
  - dnewman 22/11/2013
  */
 
-static int set_valve(Gpx *gpx, unsigned extruder_id, unsigned state)
+static int set_valve(Gpx *gpx, unsigned extruder_id, unsigned speed)
 {
     assert(extruder_id < gpx->machine.extruder_count);
     if(gpx->machine.id >= MACHINE_TYPE_REPLICATOR_1) {
@@ -1586,7 +1586,7 @@ static int set_valve(Gpx *gpx, unsigned extruder_id, unsigned state)
         write_8(gpx, 1);
 
         // uint8: 1 to enable, 0 to disable
-        write_8(gpx, state);
+        write_8(gpx, speed);
 
         return end_frame(gpx);
     }
@@ -5547,14 +5547,14 @@ int gpx_convert_line(Gpx *gpx, char *gcode_line)
 
                 // M126 - Turn blower fan on (valve open)
             case 126: {
-                int state = (gpx->command.flag & S_IS_SET) ? ((unsigned)gpx->command.s ? 1 : 0) : 1;
+                int speed = (gpx->command.flag & S_IS_SET) ? ((unsigned)gpx->command.s ? (unsigned)gpx->command.s : 0) : 100;
                 if(gpx->flag.dittoPrinting) {
-                    CALL( set_valve(gpx, B, state) );
-                    CALL( set_valve(gpx, A, state) );
+                    CALL( set_valve(gpx, B, speed) );
+                    CALL( set_valve(gpx, A, speed) );
                     command_emitted++;
                 }
                 else {
-                    CALL( set_valve(gpx, gpx->target.extruder, state) );
+                    CALL( set_valve(gpx, gpx->target.extruder, speed) );
                     command_emitted++;
                 }
                 break;
