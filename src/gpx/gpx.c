@@ -1585,7 +1585,7 @@ static int set_valve(Gpx *gpx, unsigned extruder_id, unsigned speed)
         // uint8: Length of the extruder command payload (N)
         write_8(gpx, 1);
 
-        // uint8: 1 to enable, 0 to disable
+        // uint8: 1-100 to enable, 0 to disable
         write_8(gpx, speed);
 
         return end_frame(gpx);
