@@ -36,6 +36,7 @@
 #define B38400 38400
 #define B57600 57600
 #define B115200 115200
+#define B500000 500000
 
 #if !defined(SPEED_T_DEFINED)
 typedef long speed_t;

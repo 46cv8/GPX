@@ -942,6 +942,9 @@ speed_t speed_from_long(long *baudrate)
         case 115200:
             speed=B115200;
             break;
+        case 500000:
+            speed=B500000;
+            break;
         default:
             tio_log_printf(&tio, "Error: Unsupported baud rate '%ld'\n", *baudrate);
             break;

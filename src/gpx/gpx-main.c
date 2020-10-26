@@ -490,6 +490,9 @@ int main(int argc, char * const argv[])
                     case 115200:
                         baud_rate=B115200;
                         break;
+                    case 500000:
+                        baud_rate=B500000;
+                        break;
                     default:
                         fprintf(stderr, "Command line error: unsupported baud rate '%s'" EOL, optarg);
                         usage(1);

@@ -45,6 +45,7 @@ extern "C" {
 #endif
 #else
 typedef long speed_t;
+#define B500000 500000
 #define B115200 115200
 #define B57600  57600
 #define NO_SERIAL_SUPPORT_MSG "Serial I/O and USB printing is not supported " \
