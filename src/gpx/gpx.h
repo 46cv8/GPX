@@ -34,11 +34,13 @@ extern "C" {
 #include <limits.h>
 #include <stdio.h>
 #include <stdarg.h>
+#include <time.h>
 #include "vector.h"
 #include "config.h"
 
 #if defined(SERIAL_SUPPORT)
 #if !defined(_WIN32) && !defined(_WIN64)
+#define _DARWIN_C_SOURCE
 #include <termios.h>
 #else
 #include "winsio.h"
@@ -581,6 +583,7 @@ typedef long speed_t;
         Tr bed_tr;
         Gpx *gpx;
         int upstream;
+        time_t secWaitForClearCancel;
     } Tio;
 
     // 23 - Get build statistics: build state values
